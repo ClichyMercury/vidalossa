@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "845077720591",
+    "project_id": "vidalossa-9500b",
+    "storage_bucket": "vidalossa-9500b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845077720591:android:cdb0275f6618bc371f7d7a",
+        "android_client_info": {
+          "package_name": "com.example.vidalossa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845077720591-vckt4r3gu24q131pd5etl670rahhii7h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBRbQpIFzgjA5wkZe4hfbAFHq9TPhsOBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845077720591-vckt4r3gu24q131pd5etl670rahhii7h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
