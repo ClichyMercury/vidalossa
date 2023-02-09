@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:vidalossa/screens/connection_page.dart';
+import 'package:vidalossa/utils/palette.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -29,9 +30,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'vidalossa',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: 'Inder',
+        primarySwatch: Palette.greenToDark,
       ),
       home: ConnectionPage(),
     );
