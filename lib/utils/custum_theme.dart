@@ -6,6 +6,7 @@ class CustumTheme {
   static const Color grey = Color(0xFFC3C3C3);
   static const Color Teal = Color(0xFF199898);
   static const Color BgightTeal = Color(0xFFCEE0E0);
+  static const Color lightTeal = Color(0xFF94C2C5);
 
   static ThemeData getTheme() {
     Map<String, double> fontSize = {

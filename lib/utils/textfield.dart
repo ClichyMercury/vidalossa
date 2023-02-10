@@ -13,19 +13,18 @@ Widget textFild({
   IconData? prefixIcon,
 }) {
   return Container(
-    height: 75.0,
+    height: 45.0,
     width: 320,
     decoration: BoxDecoration(
-      color: CustumTheme.Teal,
-      borderRadius: BorderRadius.circular(25.0),
+      color: CustumTheme.lightTeal,
+      borderRadius: BorderRadius.circular(15.0),
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          height: 50,
-          margin: EdgeInsets.all(20),
-          width: 250.0,
+          height: 45,
+          width: 320.0,
           child: TextField(
             showCursor: true,
             focusNode: focusNode,
