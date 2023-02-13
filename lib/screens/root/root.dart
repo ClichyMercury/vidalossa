@@ -7,6 +7,8 @@ import 'package:vidalossa/screens/root/pages/home.dart';
 import 'package:vidalossa/screens/root/pages/profile/profile.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 
+import '../chart/chart_view.dart';
+
 class BaseApp extends StatefulWidget {
   const BaseApp({
     Key? key,
@@ -54,8 +56,19 @@ class _BaseAppState extends State<BaseApp> {
               centerTitle: true,
               backgroundColor: CustumTheme.BgightTeal,
               elevation: 0,
+              actions: [
+                IconButton(
+                    onPressed: () {   Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => const ChartView()));},
+                    icon: Icon(
+                      Icons.shopping_cart,
+                      color: Colors.black,
+                    ))
+              ],
             ),
-            body: IndexedStack(
+            body: IndexedStack(              
               index: currentIndex,
               children: screens,
             ),

@@ -29,7 +29,7 @@ class ScrollList extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: CustumTheme.Teal, width: 1),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -3,6 +3,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:vidalossa/screens/root/pages/profile/userDetails.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 
+import '../../../../coponents/elevatedButton.dart';
 import 'options.dart';
 
 class Profile extends StatelessWidget {
@@ -35,7 +36,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Container(
                     padding: EdgeInsets.all(10),
-                    height: 90,
+                    height: 72,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -53,11 +54,6 @@ class Profile extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                               color: Colors.black),
                         ),
-                        Text("+225 07 68 70 73 74",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black))
                       ],
                     ),
                   ),
@@ -79,6 +75,9 @@ class Profile extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 15),
+            Mainbutton(
+                onTap: () {}, text: "L O G O U T ", btnColor: Colors.orange)
           ],
         ),
       )),

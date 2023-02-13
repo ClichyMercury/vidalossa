@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'custum_theme.dart';
+import '../utils/custum_theme.dart';
 
 Widget textFild({
   required String hintTxt,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:vidalossa/utils/Grid_card.dart';
+import 'package:vidalossa/coponents/Grid_card.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 
-import '../../../utils/scrollList.dart';
+import '../../../coponents/scrollList.dart';
 
 TextEditingController searchCrtl = TextEditingController();
 FocusNode searchNode = FocusNode();
@@ -64,7 +64,7 @@ class Home extends StatelessWidget {
               height: 175,
               decoration: BoxDecoration(
                   color: Color(0xFFD17E7E),
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
+                  borderRadius: BorderRadius.all(Radius.circular(25))),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

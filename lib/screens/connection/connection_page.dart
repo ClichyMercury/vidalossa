@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:vidalossa/utils/PWtextfield.dart';
-import 'package:vidalossa/utils/elevatedButton.dart';
-import 'package:vidalossa/utils/textfield.dart';
+import 'package:vidalossa/coponents/PWtextfield.dart';
+import 'package:vidalossa/coponents/elevatedButton.dart';
+import 'package:vidalossa/coponents/textfield.dart';
+import 'package:vidalossa/screens/root/root.dart';
 
-import '../utils/custum_theme.dart';
+import '../../coponents/alertDialog.dart';
+import '../../utils/custum_theme.dart';
 
 TextEditingController emailCtrl = TextEditingController();
 TextEditingController pwCtrl = TextEditingController();
@@ -49,7 +51,20 @@ class _ConnectionPageState extends State<ConnectionPage> {
             ),
             SizedBox(height: 13.5),
             Mainbutton(
-                onTap: () {},
+                onTap: () {
+                  if (emailCtrl.text.isNotEmpty && pwCtrl.text.isNotEmpty) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => const BaseApp()));
+                  } else {
+                    showAlertDialog(context,
+                        title: "Email or Password",
+                        content:
+                            "Make sure Email Field and Password Field is not empty before Submit",
+                        defaultActionText: "OK");
+                  }
+                },
                 text: "L  O  G  I  N",
                 btnColor: CustumTheme.Teal),
             SizedBox(height: 20.5),

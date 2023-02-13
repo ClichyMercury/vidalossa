@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
-import 'package:vidalossa/utils/elevatedButton.dart';
+import 'package:vidalossa/coponents/elevatedButton.dart';
 
-import '../../../../utils/card.dart';
+import 'card.dart';
+
+bool? loading;
 
 class UserDetails extends StatefulWidget {
   const UserDetails({super.key});
@@ -42,6 +44,7 @@ class _UserDetailsState extends State<UserDetails> {
                   radius: 100,
                 ),
               ),
+              SizedBox(height: 15),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -60,12 +63,6 @@ class _UserDetailsState extends State<UserDetails> {
                         fontWeight: FontWeight.w400,
                         color: Colors.black),
                   ),
-                  SizedBox(height: 10),
-                  Text("+225 07 68 70 73 74",
-                      style: TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black))
                 ],
               ),
               SizedBox(height: 30),
