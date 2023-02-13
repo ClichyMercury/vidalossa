@@ -4,7 +4,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:vidalossa/screens/root/pages/category.dart';
 import 'package:vidalossa/screens/root/pages/commades.dart';
 import 'package:vidalossa/screens/root/pages/home.dart';
-import 'package:vidalossa/screens/root/pages/profile.dart';
+import 'package:vidalossa/screens/root/pages/profile/profile.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 
 class BaseApp extends StatefulWidget {
