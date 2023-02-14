@@ -39,6 +39,9 @@ dependencies:
   flutter_stripe: ^8.0.0+1
   curved_navigation_bar: ^1.0.3
   line_awesome_flutter: ^2.0.0
+  latlong2: ^0.8.1
+  http: ^0.13.5
+  flutter_map: ^2.2.0
 
 dev_dependencies:
   flutter_test:

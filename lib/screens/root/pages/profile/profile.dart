@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:vidalossa/screens/connection/connection_page.dart';
 import 'package:vidalossa/screens/root/pages/profile/userDetails.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 
@@ -77,7 +77,14 @@ class Profile extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Mainbutton(
-                onTap: () {}, text: "L O G O U T ", btnColor: Colors.orange)
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => const ConnectionPage()));
+                },
+                text: "L O G O U T ",
+                btnColor: Colors.orange)
           ],
         ),
       )),

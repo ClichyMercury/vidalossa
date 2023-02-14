@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vidalossa/coponents/PWtextfield.dart';
 import 'package:vidalossa/coponents/elevatedButton.dart';
 import 'package:vidalossa/coponents/textfield.dart';
+import 'package:vidalossa/screens/connection/register_page.dart';
 import 'package:vidalossa/screens/root/root.dart';
 
 import '../../coponents/alertDialog.dart';
@@ -32,12 +33,15 @@ class _ConnectionPageState extends State<ConnectionPage> {
                 hintTxt: "Email",
                 controller: emailCtrl,
                 enabled: true,
+                keyBordType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
                 prefixIcon: Icons.login),
             SizedBox(height: 20),
             PWtextFild(
                 controller: pwCtrl,
                 enabled: true,
                 hintTxt: "password",
+                textInputAction: TextInputAction.done,
                 keyBordType: TextInputType.visiblePassword),
             SizedBox(height: 13.5),
             Align(
@@ -115,10 +119,10 @@ class _ConnectionPageState extends State<ConnectionPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    /*    Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (builder) => const SignUpPage())); */
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => const RegisterPage()));
                   },
                   child: const Text(
                     "Create here",

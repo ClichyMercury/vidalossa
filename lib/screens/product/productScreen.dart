@@ -35,7 +35,9 @@ class _ProductScreenState extends State<ProductScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
             icon: Icon(
               Icons.arrow_back_ios,
               color: Colors.black,

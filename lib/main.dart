@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:vidalossa/screens/SplashScreen/Splash_Screen.dart';
 import 'package:vidalossa/screens/connection/connection_page.dart';
 import 'package:vidalossa/screens/root/root.dart';
 import 'package:vidalossa/utils/palette.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Inder',
         primarySwatch: Palette.greenToDark,
       ),
-      home: BaseApp(),
+      home: flashScreen(),
     );
   }
 }

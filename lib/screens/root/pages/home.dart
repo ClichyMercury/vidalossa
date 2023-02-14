@@ -54,7 +54,7 @@ class Home extends StatelessWidget {
                               LineAwesomeIcons.search,
                               color: Colors.black,
                             ),
-                            enabled: true,
+                            enabled: false,
                             border: InputBorder.none,
                             hintText: "search",
                             hintStyle:

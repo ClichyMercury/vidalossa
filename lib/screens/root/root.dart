@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:vidalossa/screens/root/pages/category.dart';
+import 'package:vidalossa/screens/root/pages/Categories/category%20copy.dart';
 import 'package:vidalossa/screens/root/pages/commades.dart';
 import 'package:vidalossa/screens/root/pages/home.dart';
 import 'package:vidalossa/screens/root/pages/profile/profile.dart';
@@ -24,7 +24,7 @@ class _BaseAppState extends State<BaseApp> {
 
   int currentIndex = 0;
 
-  final screens = [Home(), Categories(), Commandes(), Profile()];
+  final screens = [Home(), Category(), Commandes(), Profile()];
 
   void _setIndex(int index) {
     setState(() {
@@ -58,17 +58,19 @@ class _BaseAppState extends State<BaseApp> {
               elevation: 0,
               actions: [
                 IconButton(
-                    onPressed: () {   Navigator.push(
+                    onPressed: () {
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (builder) => const ChartView()));},
+                              builder: (builder) => const ChartView()));
+                    },
                     icon: Icon(
                       Icons.shopping_cart,
                       color: Colors.black,
                     ))
               ],
             ),
-            body: IndexedStack(              
+            body: IndexedStack(
               index: currentIndex,
               children: screens,
             ),
