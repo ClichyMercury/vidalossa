@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:vidalossa/coponents/Grid_card.dart';
+import 'package:vidalossa/screens/product/productScreen.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 
 import '../../../coponents/scrollList.dart';
@@ -15,6 +16,11 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    onCardPressed() {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (builder) => const ProductScreen()));
+    }
+
     return Scaffold(
       backgroundColor: CustumTheme.BgightTeal,
       body: Padding(
@@ -188,7 +194,7 @@ class Home extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Gridcard(
                     index: index,
-                    onpressed: () {},
+                    onpressed: onCardPressed,
                   );
                 },
               ),
