@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vidalossa/coponents/loader.dart';
 
 class Mainbutton extends StatelessWidget {
   final Function() onTap;
@@ -6,19 +7,20 @@ class Mainbutton extends StatelessWidget {
   final String? image;
   final Color? txtColor;
   final Color btnColor;
+  final bool loading;
   const Mainbutton({
     Key? key,
     required this.onTap,
     required this.text,
     this.image,
     this.txtColor,
-    required this.btnColor,
+    required this.btnColor, required this.loading,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: loading ? null : onTap,
       child: Container(
         height: 49.0,
         width: 320,
@@ -35,7 +37,7 @@ class Mainbutton extends StatelessWidget {
                 height: 25.0,
                 width: 60.0,
               ),
-            Text(
+            loading ? const Loader() : Text(
               text,
               style:
                   TextStyle(fontWeight: FontWeight.w800, color: Colors.white),

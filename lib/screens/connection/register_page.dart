@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vidalossa/coponents/PWtextfield.dart';
 import 'package:vidalossa/coponents/elevatedButton.dart';
 import 'package:vidalossa/coponents/textfield.dart';
 import 'package:vidalossa/screens/connection/connection_page.dart';
 import 'package:vidalossa/screens/root/root.dart';
 
+import '../../auth/appState.dart';
+import '../../auth/show_exception_alert.dart';
 import '../../coponents/alertDialog.dart';
 import '../../utils/custum_theme.dart';
 
@@ -21,6 +25,20 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  void _submit(context) async {
+    try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.createUserWithEmailAndPassword(emailCtrl.text, pwCtrl.text);
+    } on FirebaseAuthException catch (e) {
+      print(e.toString());
+      showExecptionALertDialog(
+        context,
+        title: 'Sign in failed',
+        exception: e,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,28 +83,28 @@ class _RegisterPageState extends State<RegisterPage> {
                     keyBordType: TextInputType.visiblePassword),
                 SizedBox(height: 25),
                 Mainbutton(
-                    onTap: () {
-                      if (emailCtrl.text.isNotEmpty && pwCtrl.text.isNotEmpty) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (builder) => const BaseApp()));
-                      } else {
-                        showAlertDialog(context,
-                            title: "Email or Password",
-                            content:
-                                "Make sure Email Field and Password Field is not empty before Submit",
-                            defaultActionText: "OK");
-                      }
-                    },
-                    text: "S I G N   U P",
-                    btnColor: CustumTheme.Teal),
+                  onTap: () {
+                    if (emailCtrl.text.isNotEmpty && pwCtrl.text.isNotEmpty) {
+                      _submit(context);
+                    } else {
+                      showAlertDialog(context,
+                          title: "Email or Password",
+                          content:
+                              "Make sure Email Field and Password Field is not empty before Submit",
+                          defaultActionText: "OK");
+                    }
+                  },
+                  text: "S I G N   U P",
+                  btnColor: CustumTheme.Teal,
+                  loading: false,
+                ),
                 const SizedBox(height: 25),
                 const Text(
                   "By creating your account you accept the conditions of use of your data as part of the improvement of our services",
                   style: TextStyle(
                       fontWeight: FontWeight.w500, color: Colors.black),
                 ),
+                const SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

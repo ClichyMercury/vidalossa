@@ -112,7 +112,18 @@ class Home extends StatelessWidget {
                     )
                   ]),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 7.7),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  "Recently views",
+                  style: TextStyle(color: Colors.black, fontSize: 15),
+                ),
+              ),
+            ),
+            SizedBox(height: 7.7),
             Container(
               height: 70,
               child: Stack(children: [
@@ -121,44 +132,16 @@ class Home extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   children: [
                     ScrollList(
-                      string: "Tech",
-                      image:
-                          "assets/images/kisspng-laptop-tablet-computer-computer-monitor-smartphone-smartphone-tablet-app-show-5a7db44239bd87.6150444015181875862365.png",
+                      string: "Phones",
                     ),
                     ScrollList(
-                      string: "Sport",
-                      image:
-                          "assets/images/kisspng-physical-fitness-silhouette-physical-exercise-yoga-sports-silhouette-5a84e265373299.0877979515186581492261.png",
+                      string: "Electronics",
                     ),
                     ScrollList(
-                      string: "Tech",
-                      image:
-                          "assets/images/kisspng-laptop-tablet-computer-computer-monitor-smartphone-smartphone-tablet-app-show-5a7db44239bd87.6150444015181875862365.png",
+                      string: "Men Style",
                     ),
                     ScrollList(
-                      string: "Sport",
-                      image:
-                          "assets/images/kisspng-physical-fitness-silhouette-physical-exercise-yoga-sports-silhouette-5a84e265373299.0877979515186581492261.png",
-                    ),
-                    ScrollList(
-                      string: "Tech",
-                      image:
-                          "assets/images/kisspng-laptop-tablet-computer-computer-monitor-smartphone-smartphone-tablet-app-show-5a7db44239bd87.6150444015181875862365.png",
-                    ),
-                    ScrollList(
-                      string: "Sport",
-                      image:
-                          "assets/images/kisspng-physical-fitness-silhouette-physical-exercise-yoga-sports-silhouette-5a84e265373299.0877979515186581492261.png",
-                    ),
-                    ScrollList(
-                      string: "Tech",
-                      image:
-                          "assets/images/kisspng-laptop-tablet-computer-computer-monitor-smartphone-smartphone-tablet-app-show-5a7db44239bd87.6150444015181875862365.png",
-                    ),
-                    ScrollList(
-                      string: "Sport",
-                      image:
-                          "assets/images/kisspng-physical-fitness-silhouette-physical-exercise-yoga-sports-silhouette-5a84e265373299.0877979515186581492261.png",
+                      string: "Sport Articles",
                     ),
                   ],
                 )

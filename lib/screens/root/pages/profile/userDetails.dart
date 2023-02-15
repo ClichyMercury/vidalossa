@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 import 'package:vidalossa/coponents/elevatedButton.dart';
@@ -16,6 +17,15 @@ class UserDetails extends StatefulWidget {
 class _UserDetailsState extends State<UserDetails> {
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
+    // Name, email address, and profile photo URL
+    final name = user!.displayName;
+    final email = user.email;
+    final photoUrl = user.photoURL;
+
+    final emailVerified = user.emailVerified;
+    final uid = user.uid;
     return Scaffold(
       backgroundColor: CustumTheme.BgightTeal,
       appBar: AppBar(
@@ -40,7 +50,7 @@ class _UserDetailsState extends State<UserDetails> {
                 height: 150,
                 width: 150,
                 child: CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/rdj.jpeg"),
+                  backgroundImage: NetworkImage(photoUrl!),
                   radius: 100,
                 ),
               ),
@@ -49,7 +59,7 @@ class _UserDetailsState extends State<UserDetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Robert Downey JR",
+                    name!,
                     style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w800,
@@ -57,7 +67,15 @@ class _UserDetailsState extends State<UserDetails> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "robertdowney@outlook.com",
+                    email!,
+                    style: TextStyle(
+                        fontSize: 19,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    uid,
                     style: TextStyle(
                         fontSize: 19,
                         fontWeight: FontWeight.w400,
@@ -65,7 +83,7 @@ class _UserDetailsState extends State<UserDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               Wrap(
                 spacing: 10,
                 runSpacing: 15,
@@ -93,7 +111,11 @@ class _UserDetailsState extends State<UserDetails> {
               ),
               SizedBox(height: 15),
               Mainbutton(
-                  onTap: () {}, text: "Delete account", btnColor: Colors.red)
+                onTap: () {},
+                text: "Delete account",
+                btnColor: Colors.red,
+                loading: false,
+              )
             ],
           ),
         ),

@@ -54,7 +54,11 @@ class _ChartViewState extends State<ChartView> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
             child: Mainbutton(
-                onTap: () {}, text: "CHECKOUT", btnColor: CustumTheme.Teal),
+              onTap: () {},
+              text: "CHECKOUT",
+              btnColor: CustumTheme.Teal,
+              loading: false,
+            ),
           )
         ],
       )),

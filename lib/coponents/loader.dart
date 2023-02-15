@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Loader extends StatelessWidget {
-  const Loader({super.key, required this.scale});
+  const Loader({super.key, this.scale = 1});
 
   final double scale;
 
@@ -10,7 +10,7 @@ class Loader extends StatelessWidget {
     return Transform.scale(
       scale: scale,
       child: const CircularProgressIndicator(
-        color: Colors.black,
+        color: Colors.white,
         semanticsLabel: "Circular Progress Bar",
       ),
     );

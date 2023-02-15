@@ -1,15 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vidalossa/coponents/PWtextfield.dart';
 import 'package:vidalossa/coponents/elevatedButton.dart';
 import 'package:vidalossa/coponents/textfield.dart';
 import 'package:vidalossa/screens/connection/register_page.dart';
 import 'package:vidalossa/screens/root/root.dart';
 
+import '../../auth/appState.dart';
+import '../../auth/show_exception_alert.dart';
 import '../../coponents/alertDialog.dart';
 import '../../utils/custum_theme.dart';
-
-TextEditingController emailCtrl = TextEditingController();
-TextEditingController pwCtrl = TextEditingController();
 
 class ConnectionPage extends StatefulWidget {
   const ConnectionPage({super.key});
@@ -19,6 +20,48 @@ class ConnectionPage extends StatefulWidget {
 }
 
 class _ConnectionPageState extends State<ConnectionPage> {
+  TextEditingController emailCtrl = TextEditingController();
+  TextEditingController pwCtrl = TextEditingController();
+  bool _isLoading = true;
+
+  void _showSignInError(BuildContext context, Exception exception) {
+    if (exception is FirebaseException &&
+        exception.code == 'ERROR_ABORTED_BY_USER') {
+      return;
+    }
+    showExecptionALertDialog(
+      context,
+      title: 'Sign in failed',
+      exception: exception,
+    );
+  }
+
+  void _submit(context) async {
+    try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.signInWithEmailAndPassword(emailCtrl.text, pwCtrl.text);
+    } on FirebaseAuthException catch (e) {
+      print(e.toString());
+      showExecptionALertDialog(
+        context,
+        title: 'Sign in failed',
+        exception: e,
+      );
+    }
+  }
+
+  Future<void> _signInWithGoogle(context) async {
+    try {
+      setState(() => _isLoading = true);
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.signInWithGoogle();
+    } on Exception catch (e) {
+      _showSignInError(context, e);
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,22 +98,21 @@ class _ConnectionPageState extends State<ConnectionPage> {
             ),
             SizedBox(height: 13.5),
             Mainbutton(
-                onTap: () {
-                  if (emailCtrl.text.isNotEmpty && pwCtrl.text.isNotEmpty) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (builder) => const BaseApp()));
-                  } else {
-                    showAlertDialog(context,
-                        title: "Email or Password",
-                        content:
-                            "Make sure Email Field and Password Field is not empty before Submit",
-                        defaultActionText: "OK");
-                  }
-                },
-                text: "L  O  G  I  N",
-                btnColor: CustumTheme.Teal),
+              onTap: () {
+                if (emailCtrl.text.isNotEmpty && pwCtrl.text.isNotEmpty) {
+                  _submit(context);
+                } else {
+                  showAlertDialog(context,
+                      title: "Email or Password",
+                      content:
+                          "Make sure Email Field and Password Field is not empty before Submit",
+                      defaultActionText: "OK");
+                }
+              },
+              text: "L  O  G  I  N",
+              btnColor: CustumTheme.Teal,
+              loading: false,
+            ),
             SizedBox(height: 20.5),
             Text(
               "or",
@@ -82,7 +124,7 @@ class _ConnectionPageState extends State<ConnectionPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () => _signInWithGoogle(context),
                     child: SizedBox(
                       height: 80,
                       width: 80,

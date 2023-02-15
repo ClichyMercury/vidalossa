@@ -1,13 +1,17 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:vidalossa/screens/root/pages/Categories/category%20copy.dart';
 import 'package:vidalossa/screens/root/pages/commades.dart';
 import 'package:vidalossa/screens/root/pages/home.dart';
 import 'package:vidalossa/screens/root/pages/profile/profile.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 
+import '../../auth/appState.dart';
+import '../../coponents/alertDialog.dart';
 import '../chart/chart_view.dart';
+import '../connection/connection_page.dart';
 
 class BaseApp extends StatefulWidget {
   const BaseApp({
@@ -34,6 +38,28 @@ class _BaseAppState extends State<BaseApp> {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _signOut() async {
+      try {
+        final auth = Provider.of<AuthBase>(context, listen: false);
+        await auth.signOut();
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+
+    Future<void> _confirmSignOut(BuildContext context) async {
+      final didRequestSignOut = await showAlertDialog(
+        context,
+        title: "Logout",
+        content: "Are you sure you want logout ?",
+        cancelActionText: 'Cancel',
+        defaultActionText: "Logout",
+      );
+      if (didRequestSignOut == true) {
+        _signOut();
+      }
+    }
+
     final items = <Widget>[
       const Icon(LineAwesomeIcons.home, size: 30),
       const Icon(Icons.list, size: 30),
@@ -51,6 +77,11 @@ class _BaseAppState extends State<BaseApp> {
           child: Scaffold(
             extendBody: true,
             appBar: AppBar(
+              leading: IconButton(
+                  onPressed: () {
+                    _confirmSignOut(context);
+                  },
+                  icon: Icon(Icons.logout)),
               title: Image.asset(
                   "assets/images/LogoSample_ByTailorBrands-removebg-preview (1).png"),
               centerTitle: true,

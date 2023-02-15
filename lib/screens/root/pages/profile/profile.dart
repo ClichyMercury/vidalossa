@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vidalossa/screens/connection/connection_page.dart';
 import 'package:vidalossa/screens/root/pages/profile/userDetails.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 
+import '../../../../auth/appState.dart';
+import '../../../../coponents/alertDialog.dart';
 import '../../../../coponents/elevatedButton.dart';
 import 'options.dart';
 
@@ -11,6 +15,37 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
+    // Name, email address, and profile photo URL
+    final name = user!.displayName;
+    final email = user.email;
+    final photoUrl = user.photoURL;
+
+    final emailVerified = user.emailVerified;
+    final uid = user.uid;
+    Future<void> _signOut() async {
+      try {
+        final auth = Provider.of<AuthBase>(context, listen: false);
+        await auth.signOut();
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+
+    Future<void> _confirmSignOut(BuildContext context) async {
+      final didRequestSignOut = await showAlertDialog(
+        context,
+        title: "Logout",
+        content: "Are you sure you want logout ?",
+        cancelActionText: 'Cancel',
+        defaultActionText: "Logout",
+      );
+      if (didRequestSignOut == true) {
+        _signOut();
+      }
+    }
+
     return Scaffold(
       backgroundColor: CustumTheme.BgightTeal,
       body: SingleChildScrollView(
@@ -25,7 +60,7 @@ class Profile extends StatelessWidget {
                   height: 100,
                   width: 100,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/rdj.jpeg"),
+                    backgroundImage: NetworkImage(photoUrl!),
                     radius: 100,
                   ),
                 ),
@@ -36,21 +71,21 @@ class Profile extends StatelessWidget {
                   },
                   child: Container(
                     padding: EdgeInsets.all(10),
-                    height: 72,
+                    height: 65,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Robert Downey JR",
+                          name!,
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 16,
                               fontWeight: FontWeight.w800,
                               color: Colors.black),
                         ),
                         Text(
-                          "robertdowney@outlook.com",
+                          email!,
                           style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 13,
                               fontWeight: FontWeight.w400,
                               color: Colors.black),
                         ),
@@ -77,14 +112,13 @@ class Profile extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Mainbutton(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (builder) => const ConnectionPage()));
-                },
-                text: "L O G O U T ",
-                btnColor: Colors.orange)
+              onTap: () {
+                _confirmSignOut(context);
+              },
+              text: "L O G O U T ",
+              btnColor: Colors.orange,
+              loading: false,
+            )
           ],
         ),
       )),

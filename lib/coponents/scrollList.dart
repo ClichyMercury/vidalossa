@@ -5,12 +5,10 @@ class ScrollList extends StatelessWidget {
   const ScrollList({
     super.key,
     required this.string,
-    required this.image,
     //required this.touch,
   });
 
   final String string;
-  final String image;
   //final Widget touch;
 
   @override
@@ -27,23 +25,15 @@ class ScrollList extends StatelessWidget {
         height: 15,
         width: 125,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: CustumTheme.lightTeal,
           border: Border.all(color: CustumTheme.Teal, width: 1),
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Image.asset(
-              image,
-              height: 50,
-              width: 50,
-            ),
-            Text(
-              string,
-              style: TextStyle(fontSize: 19, color: CustumTheme.Teal),
-            ),
-          ],
+        child: Center(
+          child: Text(
+            string,
+            style: TextStyle(fontSize: 15, color: Colors.black),
+          ),
         ),
       ),
     );
