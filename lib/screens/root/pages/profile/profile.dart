@@ -10,9 +10,16 @@ import '../../../../coponents/alertDialog.dart';
 import '../../../../coponents/elevatedButton.dart';
 import 'options.dart';
 
-class Profile extends StatelessWidget {
+bool _isLoading = false;
+
+class Profile extends StatefulWidget {
   const Profile({super.key});
 
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
@@ -26,10 +33,13 @@ class Profile extends StatelessWidget {
     final uid = user.uid;
     Future<void> _signOut() async {
       try {
+        setState(() => _isLoading = true);
         final auth = Provider.of<AuthBase>(context, listen: false);
         await auth.signOut();
       } catch (e) {
         print(e.toString());
+      } finally {
+        setState(() => _isLoading = false);
       }
     }
 
@@ -60,7 +70,9 @@ class Profile extends StatelessWidget {
                   height: 100,
                   width: 100,
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(photoUrl!),
+                    backgroundImage: /* AssetImage(
+                        "assets/images/rdj.jpeg"), */
+                        NetworkImage('${photoUrl}'),
                     radius: 100,
                   ),
                 ),
@@ -76,7 +88,7 @@ class Profile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          name!,
+                          '${name}',
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w800,
@@ -117,7 +129,7 @@ class Profile extends StatelessWidget {
               },
               text: "L O G O U T ",
               btnColor: Colors.orange,
-              loading: false,
+              loading: _isLoading,
             )
           ],
         ),

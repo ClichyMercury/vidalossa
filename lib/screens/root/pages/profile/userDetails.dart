@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 import 'package:vidalossa/coponents/elevatedButton.dart';
 
+import '../../../../auth/appState.dart';
+import '../../../../coponents/alertDialog.dart';
 import 'card.dart';
 
-bool? loading;
+bool _isLoading = false;
 
 class UserDetails extends StatefulWidget {
   const UserDetails({super.key});
@@ -25,6 +28,31 @@ class _UserDetailsState extends State<UserDetails> {
     final photoUrl = user.photoURL;
 
     final emailVerified = user.emailVerified;
+
+    Future<void> _deleteAccount() async {
+      try {
+        setState(() => _isLoading = true);
+        await user.delete();
+      } catch (e) {
+        print(e.toString());
+      } finally {
+        setState(() => _isLoading = false);
+      }
+    }
+
+    Future<void> _confirmDeleteAccount(BuildContext context) async {
+      final didRequestSignOut = await showAlertDialog(
+        context,
+        title: "Logout",
+        content: "Are you sure you want delete your account ?",
+        cancelActionText: 'Cancel',
+        defaultActionText: "DELETE",
+      );
+      if (didRequestSignOut == true) {
+        _deleteAccount();
+      }
+    }
+
     final uid = user.uid;
     return Scaffold(
       backgroundColor: CustumTheme.BgightTeal,
@@ -50,7 +78,7 @@ class _UserDetailsState extends State<UserDetails> {
                 height: 150,
                 width: 150,
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(photoUrl!),
+                  backgroundImage: NetworkImage('${photoUrl}'),
                   radius: 100,
                 ),
               ),
@@ -59,7 +87,7 @@ class _UserDetailsState extends State<UserDetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    name!,
+                    '${name}',
                     style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w800,
@@ -67,7 +95,7 @@ class _UserDetailsState extends State<UserDetails> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    email!,
+                    '${email}',
                     style: TextStyle(
                         fontSize: 19,
                         fontWeight: FontWeight.w400,
@@ -111,10 +139,12 @@ class _UserDetailsState extends State<UserDetails> {
               ),
               SizedBox(height: 15),
               Mainbutton(
-                onTap: () {},
+                onTap: () {
+                  _confirmDeleteAccount(context);
+                },
                 text: "Delete account",
                 btnColor: Colors.red,
-                loading: false,
+                loading: _isLoading,
               )
             ],
           ),

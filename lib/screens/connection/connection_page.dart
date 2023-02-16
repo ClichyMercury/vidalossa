@@ -5,8 +5,7 @@ import 'package:vidalossa/coponents/PWtextfield.dart';
 import 'package:vidalossa/coponents/elevatedButton.dart';
 import 'package:vidalossa/coponents/textfield.dart';
 import 'package:vidalossa/screens/connection/register_page.dart';
-import 'package:vidalossa/screens/root/root.dart';
-
+import 'package:vidalossa/screens/connection/resetPassword.dart';
 import '../../auth/appState.dart';
 import '../../auth/show_exception_alert.dart';
 import '../../coponents/alertDialog.dart';
@@ -22,7 +21,7 @@ class ConnectionPage extends StatefulWidget {
 class _ConnectionPageState extends State<ConnectionPage> {
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController pwCtrl = TextEditingController();
-  bool _isLoading = true;
+  bool _isLoading = false;
 
   void _showSignInError(BuildContext context, Exception exception) {
     if (exception is FirebaseException &&
@@ -38,6 +37,7 @@ class _ConnectionPageState extends State<ConnectionPage> {
 
   void _submit(context) async {
     try {
+      setState(() => _isLoading = true);
       final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.signInWithEmailAndPassword(emailCtrl.text, pwCtrl.text);
     } on FirebaseAuthException catch (e) {
@@ -47,6 +47,8 @@ class _ConnectionPageState extends State<ConnectionPage> {
         title: 'Sign in failed',
         exception: e,
       );
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
@@ -90,7 +92,12 @@ class _ConnectionPageState extends State<ConnectionPage> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => const ResetPassword()));
+                  },
                   child: Text(
                     "Forgot Password ?",
                     style: TextStyle(color: Colors.black, fontSize: 17),
@@ -111,7 +118,7 @@ class _ConnectionPageState extends State<ConnectionPage> {
               },
               text: "L  O  G  I  N",
               btnColor: CustumTheme.Teal,
-              loading: false,
+              loading: _isLoading,
             ),
             SizedBox(height: 20.5),
             Text(

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +18,8 @@ TextEditingController emailCtrl = TextEditingController();
 TextEditingController pwCtrl = TextEditingController();
 TextEditingController nameCtrl = TextEditingController();
 TextEditingController numCtrl = TextEditingController();
+final user = FirebaseAuth.instance.currentUser!;
+bool _isLoading = false;
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -27,8 +31,11 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   void _submit(context) async {
     try {
+      setState(() => _isLoading = true);
       final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.createUserWithEmailAndPassword(emailCtrl.text, pwCtrl.text);
+      await user.sendEmailVerification();
+      print(user.uid);
     } on FirebaseAuthException catch (e) {
       print(e.toString());
       showExecptionALertDialog(
@@ -36,8 +43,12 @@ class _RegisterPageState extends State<RegisterPage> {
         title: 'Sign in failed',
         exception: e,
       );
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   text: "S I G N   U P",
                   btnColor: CustumTheme.Teal,
-                  loading: false,
+                  loading: _isLoading,
                 ),
                 const SizedBox(height: 25),
                 const Text(
