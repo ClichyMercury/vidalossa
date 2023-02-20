@@ -46,6 +46,8 @@ dependencies:
   google_sign_in: ^5.4.4
   provider: ^6.0.5
   equatable: ^2.0.5
+  open_whatsapp: ^0.0.1
+  url_launcher: ^6.1.9
 
 dev_dependencies:
   flutter_test:

@@ -7,11 +7,9 @@ import 'package:vidalossa/screens/root/pages/commades.dart';
 import 'package:vidalossa/screens/root/pages/home.dart';
 import 'package:vidalossa/screens/root/pages/profile/profile.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
-
 import '../../auth/appState.dart';
 import '../../coponents/alertDialog.dart';
 import '../chart/chart_view.dart';
-import '../connection/connection_page.dart';
 
 class BaseApp extends StatefulWidget {
   const BaseApp({

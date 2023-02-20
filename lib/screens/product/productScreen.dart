@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:url_launcher/url_launcher.dart';
+//import 'package:open_whatsapp/open_whatsapp.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:vidalossa/screens/product/Size.dart';
+import 'package:vidalossa/screens/product/ProductSize.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
+import 'dart:io' show Platform;
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -24,6 +25,40 @@ class _ProductScreenState extends State<ProductScreen> {
     setState(() {
       adButtonLoaded = false;
     });
+  }
+
+/*   void whatsAppOpen() async {
+    await FlutterLaunch.launchWhatsapp(
+        phone: "+2550788571346",
+        message: "Bonjour J'ai vu votre annonce sur Vidalossa App ");
+  } */
+
+  openwhatsapp() async {
+    var whatsapp = "+2250788571346";
+    final Uri whatsappURl_android = Uri.parse(
+        "https://wa.me/$whatsapp?text=${Uri.parse("Bonjour J'ai vu votre annonce sur Vidalossa App ")}");
+    final Uri whatappURL_ios = Uri.parse(
+        "https://wa.me/$whatsapp?text=${Uri.parse("Bonjour J'ai vu votre annonce sur Vidalossa App ")}");
+    if (Platform.isIOS) {
+      // for iOS phone only
+      if (await canLaunchUrl(whatappURL_ios)) {
+        await launchUrl(whatappURL_ios);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
+      }
+    } else {
+      // android , web
+      if (await canLaunchUrl(
+        whatsappURl_android,
+      )) {
+        await launchUrl(whatsappURl_android,
+            mode: LaunchMode.externalApplication);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
+      }
+    }
   }
 
   @override
@@ -85,7 +120,9 @@ class _ProductScreenState extends State<ProductScreen> {
                             LineAwesomeIcons.what_s_app,
                             color: Colors.white,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            openwhatsapp();
+                          },
                         ),
                       ),
                     )
