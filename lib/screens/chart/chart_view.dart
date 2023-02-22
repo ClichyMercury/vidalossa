@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:vidalossa/coponents/elevatedButton.dart';
 import 'package:vidalossa/screens/chart/list_card.dart';
 import 'package:vidalossa/utils/custum_theme.dart';

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-Future showAlertDialog(
+import '../auth/landing_page.dart';
+
+Future resetPasswordCustumAlertDialog(
   BuildContext context, {
   required String title,
   required String content,
@@ -31,7 +33,8 @@ Future showAlertDialog(
                 child: Text(cancelActionText),
               ),
             TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => LandingPage())),
               child: Text(defaultActionText),
             ),
           ],

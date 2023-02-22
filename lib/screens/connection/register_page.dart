@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,9 +5,8 @@ import 'package:vidalossa/coponents/PWtextfield.dart';
 import 'package:vidalossa/coponents/elevatedButton.dart';
 import 'package:vidalossa/coponents/textfield.dart';
 import 'package:vidalossa/screens/connection/connection_page.dart';
-import 'package:vidalossa/screens/root/root.dart';
-
 import '../../auth/appState.dart';
+import '../../auth/landing_page.dart';
 import '../../auth/show_exception_alert.dart';
 import '../../coponents/alertDialog.dart';
 import '../../utils/custum_theme.dart';
@@ -36,6 +33,8 @@ class _RegisterPageState extends State<RegisterPage> {
       await auth.createUserWithEmailAndPassword(emailCtrl.text, pwCtrl.text);
       await user.sendEmailVerification();
       print(user.uid);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => LandingPage()));
     } on FirebaseAuthException catch (e) {
       print(e.toString());
       showExecptionALertDialog(
@@ -47,8 +46,6 @@ class _RegisterPageState extends State<RegisterPage> {
       setState(() => _isLoading = false);
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {

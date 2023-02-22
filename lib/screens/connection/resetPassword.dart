@@ -1,18 +1,13 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vidalossa/coponents/PWtextfield.dart';
 import 'package:vidalossa/coponents/elevatedButton.dart';
 import 'package:vidalossa/coponents/textfield.dart';
-import 'package:vidalossa/screens/connection/connection_page.dart';
-import 'package:vidalossa/screens/root/root.dart';
 
 import '../../auth/appState.dart';
-
 import '../../auth/show_exception_alert.dart';
 import '../../coponents/alertDialog.dart';
+import '../../coponents/resetPasswordAlertDialog.dart';
 import '../../utils/custum_theme.dart';
 
 TextEditingController emailCtrl = TextEditingController();
@@ -27,6 +22,12 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+/*   @override
+  void dispose() {
+    emailCtrl.dispose();
+    super.dispose();
+  } */
+
   @override
   Widget build(BuildContext context) {
     Future<void> resetPassword(context) async {
@@ -43,6 +44,12 @@ class _ResetPasswordState extends State<ResetPassword> {
         );
       } finally {
         setState(() => _isLoading = false);
+        resetPasswordCustumAlertDialog(context,
+            title: "Check your mailbox",
+            content:
+                "We have sent you a link in your mailbox to allow you to reset your password",
+            defaultActionText: "OK");
+        /*  */
       }
     }
 

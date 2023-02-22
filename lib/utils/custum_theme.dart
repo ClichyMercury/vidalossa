@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class CustumTheme {
@@ -33,12 +31,6 @@ class CustumTheme {
               TextStyle(color: Colors.black, fontSize: fontSize['small']),
           headlineSmall:
               TextStyle(color: Colors.black, fontSize: fontSize['very small']),
-          headline1:
-              TextStyle(color: Colors.white, fontSize: fontSize['medium']),
-          headline2:
-              TextStyle(color: Colors.teal, fontSize: fontSize['medium']),
-          headline3:
-              TextStyle(color: Colors.white, fontSize: fontSize['very small']),
         ));
   }
 }

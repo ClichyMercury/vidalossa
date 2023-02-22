@@ -1,13 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
-import 'package:vidalossa/screens/SplashScreen/Splash_Screen.dart';
-import 'package:vidalossa/screens/connection/connection_page.dart';
-import 'package:vidalossa/screens/root/root.dart';
 import 'package:vidalossa/utils/palette.dart';
 import 'auth/appState.dart';
 import 'auth/landing_page.dart';

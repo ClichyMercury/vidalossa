@@ -1,10 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 import 'package:vidalossa/coponents/elevatedButton.dart';
-
-import '../../../../auth/appState.dart';
 import '../../../../coponents/alertDialog.dart';
 import 'card.dart';
 
@@ -26,8 +23,6 @@ class _UserDetailsState extends State<UserDetails> {
     final name = user!.displayName;
     final email = user.email;
     final photoUrl = user.photoURL;
-
-    final emailVerified = user.emailVerified;
 
     Future<void> _deleteAccount() async {
       try {

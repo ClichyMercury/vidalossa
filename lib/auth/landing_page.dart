@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vidalossa/auth/appState.dart';
-import 'package:vidalossa/screens/SplashScreen/Splash_Screen.dart';
 import 'package:vidalossa/screens/connection/connection_page.dart';
 import 'package:vidalossa/screens/root/root.dart';
 

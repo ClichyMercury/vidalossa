@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vidalossa/screens/connection/connection_page.dart';
 import 'package:vidalossa/screens/root/pages/profile/userDetails.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
-
 import '../../../../auth/appState.dart';
 import '../../../../coponents/alertDialog.dart';
 import '../../../../coponents/elevatedButton.dart';
@@ -29,8 +27,7 @@ class _ProfileState extends State<Profile> {
     final email = user.email;
     final photoUrl = user.photoURL;
 
-    final emailVerified = user.emailVerified;
-    final uid = user.uid;
+
     Future<void> _signOut() async {
       try {
         setState(() => _isLoading = true);
@@ -95,7 +92,7 @@ class _ProfileState extends State<Profile> {
                               color: Colors.black),
                         ),
                         Text(
-                          email!,
+                          '${email}',
                           style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w400,
