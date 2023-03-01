@@ -27,7 +27,7 @@ class _ViewAllState extends State<ViewAll> {
   Widget build(BuildContext context) {
     onCardPressed(Product product) {
       Navigator.push(context,
-          MaterialPageRoute(builder: (builder) => const ProductScreen()));
+          MaterialPageRoute(builder: (builder) => ProductScreen(product: product)));
     }
 
     return Scaffold(
@@ -65,6 +65,7 @@ class _ViewAllState extends State<ViewAll> {
                       crossAxisSpacing: 10),
                   itemBuilder: (BuildContext context, int index) {
                     return Gridcard(
+                        product: snapshot.data![index],
                         index: index,
                         onpressed: (() {
                           onCardPressed(snapshot.data![index]);

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-//import 'package:open_whatsapp/open_whatsapp.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:vidalossa/screens/product/ProductSize.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
+import '../../../../models/product.dart';
 import 'dart:io' show Platform;
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
+  final Product product;
+  const ProductScreen({super.key, required this.product});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -105,7 +106,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       height: 500,
                       width: double.infinity,
                       child: Image.network(
-                        "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                        widget.product.image,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -142,12 +143,12 @@ class _ProductScreenState extends State<ProductScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Gateau Mirtille",
+                                  widget.product.title,
                                   style:
                                       Theme.of(context).textTheme.headlineSmall,
                                 ),
                                 Text(
-                                  "By MC Delices",
+                                  widget.product.category,
                                   style: TextStyle(
                                       color: Colors.grey.shade500,
                                       fontSize: 14),
@@ -161,7 +162,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  "USD 12.99",
+                                  "USD ${widget.product.price}",
                                   style:
                                       Theme.of(context).textTheme.headlineSmall,
                                 ),
@@ -280,7 +281,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            "MC DÉLICES is based in the design of everything that is pastry such as cakes, madeleine, birthday cake, wedding cake, baptism, dowry. From pastry as croissant, chocolate bread, pancake, ice cream like juice ice cream, milk... I also make sweet and salty croquettes, pizzas and sandwiches, Pastel, chawarma, baked bread, chocolate mousse, salted crepe, quiche that's a bit what I do... 😊",
+                            widget.product.description,
                           ),
                           Container(
                             height: 70,

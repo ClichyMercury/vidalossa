@@ -10,7 +10,7 @@ class Loader extends StatelessWidget {
     return Transform.scale(
       scale: scale,
       child: const CircularProgressIndicator(
-        color: Colors.white,
+        color: Colors.black,
         semanticsLabel: "Circular Progress Bar",
       ),
     );

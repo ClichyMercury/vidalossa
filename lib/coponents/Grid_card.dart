@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 
+import '../models/product.dart';
+
 class Gridcard extends StatefulWidget {
-  const Gridcard({super.key, required this.index, required this.onpressed});
+  const Gridcard(
+      {super.key,
+      required this.index,
+      required this.onpressed,
+      required this.product});
 
   final int index;
   final void Function() onpressed;
+  final Product product;
 
   @override
   State<Gridcard> createState() => _GridcardState();
@@ -17,7 +24,7 @@ class _GridcardState extends State<Gridcard> {
     return Container(
       margin: widget.index % 2 == 0
           ? const EdgeInsets.only(left: 12)
-          : const EdgeInsets.only(left: 12),
+          : const EdgeInsets.only(right: 12),
       decoration: BoxDecoration(
           border: Border.all(color: CustumTheme.Teal, width: 1.0),
           color: CustumTheme.lightTeal,
@@ -32,7 +39,7 @@ class _GridcardState extends State<Gridcard> {
               child: SizedBox(
                 width: double.infinity,
                 child: Image.network(
-                  "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                  widget.product.image,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -44,13 +51,13 @@ class _GridcardState extends State<Gridcard> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 4),
                     child: Text(
-                      "Gateau Mirtille",
+                      widget.product.title,
                       style:
                           TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Text(
-                    "USD 12.99",
+                    widget.product.price.toString(),
                     style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
                   )
                 ],
