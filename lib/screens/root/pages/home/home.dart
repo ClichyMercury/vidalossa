@@ -4,7 +4,7 @@ import 'package:vidalossa/coponents/Grid_card.dart';
 import 'package:vidalossa/screens/product/productScreen.dart';
 import 'package:vidalossa/utils/custum_theme.dart';
 
-import '../../../coponents/scrollList.dart';
+import '../../../../coponents/scrollList.dart';
 
 TextEditingController searchCrtl = TextEditingController();
 FocusNode searchNode = FocusNode();

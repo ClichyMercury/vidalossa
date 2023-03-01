@@ -48,11 +48,16 @@ dependencies:
   equatable: ^2.0.5
   open_whatsapp: ^0.0.1
   url_launcher: ^6.1.9
+  cloud_firestore: ^4.4.3
+  json_annotation: ^4.8.0
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.11.0
+  build_runner: ^2.3.3
+  json_serializable: ^6.6.1
 
 flutter_icons:
   android: "launcher_icon"
